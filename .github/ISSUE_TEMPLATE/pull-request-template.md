@@ -1,0 +1,15 @@
+---
+name: Pull Request Template
+about: pr template
+title: ''
+labels: ''
+assignees: y-eonee
+
+---
+
+# n주차 실습 과제
+## 구현한 내용   
+
+## 새롭게 알게된 내용    
+ 
+## 구현화면
