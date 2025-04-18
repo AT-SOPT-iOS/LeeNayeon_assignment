@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CD09D7FC037933AF2DEFDD7 /* Pods_Sopt36Assignment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0D988A3CFA70C7169A4607F /* Pods_Sopt36Assignment.framework */; };
 		51B2CD432DAD7F36002E383B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 51B2CD422DAD7F36002E383B /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D175A4D0ED75481C537DF90 /* Pods-Sopt36Assignment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sopt36Assignment.debug.xcconfig"; path = "Target Support Files/Pods-Sopt36Assignment/Pods-Sopt36Assignment.debug.xcconfig"; sourceTree = "<group>"; };
+		41EAAE2F93C64D7BE7C6DDFF /* Pods-Sopt36Assignment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sopt36Assignment.release.xcconfig"; path = "Target Support Files/Pods-Sopt36Assignment/Pods-Sopt36Assignment.release.xcconfig"; sourceTree = "<group>"; };
 		5148BBD42DAD7AF5003B4BA8 /* Sopt36Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sopt36Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51B2CD422DAD7F36002E383B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		B0D988A3CFA70C7169A4607F /* Pods_Sopt36Assignment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sopt36Assignment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD09D7FC037933AF2DEFDD7 /* Pods_Sopt36Assignment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +58,8 @@
 				51B2CD422DAD7F36002E383B /* .gitignore */,
 				5148BBD62DAD7AF5003B4BA8 /* Sopt36Assignment */,
 				5148BBD52DAD7AF5003B4BA8 /* Products */,
+				F29EF6F31F4322699337401B /* Pods */,
+				F7960D1BE96815E93420868E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F29EF6F31F4322699337401B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D175A4D0ED75481C537DF90 /* Pods-Sopt36Assignment.debug.xcconfig */,
+				41EAAE2F93C64D7BE7C6DDFF /* Pods-Sopt36Assignment.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F7960D1BE96815E93420868E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0D988A3CFA70C7169A4607F /* Pods_Sopt36Assignment.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +96,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5148BBE72DAD7AF6003B4BA8 /* Build configuration list for PBXNativeTarget "Sopt36Assignment" */;
 			buildPhases = (
+				517BD9FB8FD184D4FF2B19B1 /* [CP] Check Pods Manifest.lock */,
 				5148BBD02DAD7AF5003B4BA8 /* Sources */,
 				5148BBD12DAD7AF5003B4BA8 /* Frameworks */,
 				5148BBD22DAD7AF5003B4BA8 /* Resources */,
+				AC527A97BB7264EB59724260 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -83,8 +110,6 @@
 				5148BBD62DAD7AF5003B4BA8 /* Sopt36Assignment */,
 			);
 			name = Sopt36Assignment;
-			packageProductDependencies = (
-			);
 			productName = Sopt36Assignment;
 			productReference = 5148BBD42DAD7AF5003B4BA8 /* Sopt36Assignment.app */;
 			productType = "com.apple.product-type.application";
@@ -134,6 +159,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		517BD9FB8FD184D4FF2B19B1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sopt36Assignment-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC527A97BB7264EB59724260 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sopt36Assignment/Pods-Sopt36Assignment-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sopt36Assignment/Pods-Sopt36Assignment-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sopt36Assignment/Pods-Sopt36Assignment-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5148BBD02DAD7AF5003B4BA8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -147,6 +214,7 @@
 /* Begin XCBuildConfiguration section */
 		5148BBE82DAD7AF6003B4BA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D175A4D0ED75481C537DF90 /* Pods-Sopt36Assignment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -173,6 +241,7 @@
 		};
 		5148BBE92DAD7AF6003B4BA8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41EAAE2F93C64D7BE7C6DDFF /* Pods-Sopt36Assignment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
