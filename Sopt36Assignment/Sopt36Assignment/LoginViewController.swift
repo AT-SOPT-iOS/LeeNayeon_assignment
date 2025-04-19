@@ -66,10 +66,13 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.setTitle("로그인하기", for: .normal)
         $0.backgroundColor = .clear
         $0.setTitleColor(.gray2, for: .normal)
+        $0.setTitleColor(.white, for: .selected)
         $0.titleLabel?.font = .pretendard(.semiBold, size: 14)
         $0.layer.cornerRadius = 3
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray4.cgColor
+        $0.addTarget(self, action: #selector(login), for: .touchUpInside)
+        $0.setBackgroundColor(color: .red)
         
     }
     
@@ -278,6 +281,12 @@ extension LoginViewController {
         }
     }
     
+    //MARK: - login
+    @objc
+    func login(){
+        loginButton.isSelected.toggle()
+        loginButton.layer.borderWidth = 0
+    }
 
 }
 
