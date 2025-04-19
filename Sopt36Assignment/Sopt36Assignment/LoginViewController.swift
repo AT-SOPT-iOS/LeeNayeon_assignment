@@ -23,7 +23,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.text = "TVING ID 로그인"
     }
     
-    private let idTextField = UITextField().then{
+    private lazy var idTextField = UITextField().then{
         $0.placeholder = "아이디"
         $0.font = .pretendard(.semiBold, size: 15)
         $0.textColor = .gray2
@@ -33,11 +33,9 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.addLeftPadding(20)
     }
 
-    private lazy var pwInnerView = UIView().then{
-        $0.isHidden = true
-    }
+    private var pwInnerView = UIView()
     
-    private let passwordTextField = UITextField().then{
+    private lazy var passwordTextField = UITextField().then{
         $0.placeholder = "비밀번호"
         $0.font = .pretendard(.semiBold, size: 15)
         $0.textColor = .gray2
@@ -46,19 +44,27 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.layer.cornerRadius = 3
         $0.addLeftPadding(20)
         $0.isSecureTextEntry = true
+        $0.textContentType = .oneTimeCode
+        $0.rightViewMode = .whileEditing
+        $0.rightView = pwInnerView
     }
     
     private lazy var idClearButton = UIButton().then{
         $0.setImage(.xCircle, for: .normal)
         $0.isHidden = true
+        $0.addTarget(self, action: #selector(clearIdTextField), for: .touchUpInside)
     }
     
     private lazy var pwClearButton = UIButton().then{
         $0.setImage(.xCircle, for: .normal)
+        $0.addTarget(self, action: #selector(clearPwTextField), for: .touchUpInside)
+        $0.isUserInteractionEnabled = true
     }
     
     private lazy var secureButton = UIButton().then{
         $0.setImage(.eyeSlash, for: .normal)
+        $0.addTarget(self, action: #selector(setSecurityFalse), for: .touchUpInside)
+        $0.isUserInteractionEnabled = true
     }
     
     
@@ -132,6 +138,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
 extension LoginViewController {
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -164,7 +171,6 @@ extension LoginViewController {
             idTextField,
             passwordTextField,
             idClearButton,
-            pwInnerView,
             loginButton,
             findStackView,
             helpStackView
@@ -198,11 +204,6 @@ extension LoginViewController {
             $0.height.equalTo(52)
         }
         
-        pwInnerView.snp.makeConstraints {
-            $0.trailing.equalTo(passwordTextField.snp.trailing).inset(20)
-            $0.centerY.equalTo(passwordTextField)
-        }
-        
         pwClearButton.snp.makeConstraints{
             $0.leading.equalToSuperview()
             $0.centerY.equalToSuperview()
@@ -210,7 +211,7 @@ extension LoginViewController {
         
         secureButton.snp.makeConstraints{
             $0.leading.equalTo(pwClearButton.snp.trailing).offset(16)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
             $0.centerY.equalToSuperview()
         }
         
@@ -258,6 +259,7 @@ extension LoginViewController {
     }
     
     // MARK: - UITextFieldDelegate
+    
     func textFieldDidBeginEditing(_ textField: UITextField){
         if textField == idTextField {
             textField.layer.borderWidth = 1
@@ -267,7 +269,6 @@ extension LoginViewController {
         } else if textField == passwordTextField {
             textField.layer.borderWidth = 1
             textField.layer.borderColor = UIColor.gray2.cgColor
-            pwInnerView.isHidden = false
         }
     }
     
@@ -277,15 +278,32 @@ extension LoginViewController {
             idClearButton.isHidden = true
         } else if textField == passwordTextField {
             textField.layer.borderWidth = 0
-            pwInnerView.isHidden = true
         }
     }
     
     //MARK: - login
+    
     @objc
     func login(){
         loginButton.isSelected.toggle()
         loginButton.layer.borderWidth = 0
+    }
+    
+    //MARK: - clear & hide
+    
+    @objc
+    func clearIdTextField(){
+        idTextField.text = ""
+    }
+    
+    @objc
+    func clearPwTextField(){
+        passwordTextField.text = ""
+    }
+    
+    @objc
+    func setSecurityFalse(){
+        passwordTextField.isSecureTextEntry.toggle()
     }
 
 }
