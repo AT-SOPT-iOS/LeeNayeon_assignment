@@ -18,7 +18,11 @@ extension UIButton {
         setAttributedTitle(attributedString, for: .normal)
     }
     
-    func setBackgroundColor(color: UIColor){
+    func setSelectedBackgroundColor(colorName: String){
+        guard let color = UIColor(named: colorName) else {
+            print("컬러에셋 '\(colorName)' 없음!")
+            return
+        }
         self.clipsToBounds = true
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         if let context = UIGraphicsGetCurrentContext() {
