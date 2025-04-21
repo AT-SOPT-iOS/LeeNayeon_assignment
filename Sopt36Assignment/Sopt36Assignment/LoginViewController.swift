@@ -9,7 +9,13 @@ import UIKit
 import SnapKit
 import Then
 
+protocol DataBindDelegate: AnyObject {
+    func welcomeDataBind(name: String)
+}
+
 final class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    weak var delegate: DataBindDelegate?
     
     // MARK: - UIComponents
     
@@ -31,6 +37,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.backgroundColor = .gray4
         $0.layer.cornerRadius = 3
         $0.addLeftPadding(20)
+        $0.addTarget(self, action: #selector(idTextFieldDidChange), for: .editingDidEnd)
     }
 
     private var pwInnerView = UIView()
@@ -47,6 +54,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.textContentType = .oneTimeCode
         $0.rightViewMode = .whileEditing
         $0.rightView = pwInnerView
+        $0.addTarget(self, action: #selector(passwordTextFieldDidChange), for: .editingDidEnd)
     }
     
     private lazy var idClearButton = UIButton().then{
@@ -287,6 +295,14 @@ extension LoginViewController {
     func login(){
         loginButton.isSelected.toggle()
         loginButton.layer.borderWidth = 0
+        
+        pushToWelcomeVC()
+    }
+    
+    private func pushToWelcomeVC(){
+        let welcomeVC = WelcomeViewController()
+        welcomeVC.nameText = idTextField.text
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
     
     //MARK: - clear & hide
@@ -304,6 +320,31 @@ extension LoginViewController {
     @objc
     func setSecurityFalse(){
         passwordTextField.isSecureTextEntry.toggle()
+    }
+    
+    //MARK: - valid check
+    @objc
+    func idTextFieldDidChange(_ textField: UITextField){
+        let id = idTextField.text ?? ""
+        
+        if !id.isValidEmail(email: id){
+            let invalidAlert = UIAlertController(title: "올바르지 않은 형식", message: "이메일 형식이 올바르지 않습니다.", preferredStyle: UIAlertController.Style.alert)
+            let confirm = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
+            invalidAlert.addAction(confirm)
+            present(invalidAlert, animated: true , completion: nil)
+        }
+    }
+    
+    @objc
+    func passwordTextFieldDidChange(_ textField: UITextField){
+        let password = passwordTextField.text ?? ""
+        
+        if !password.isValidPassword(password: password){
+            let invalidAlert = UIAlertController(title: "올바르지 않은 형식", message: "비밀번호는 영어 대소문자 및 숫자 포함 8자 이상, 특수문자 1개 이상 포함이어여합니다.", preferredStyle: UIAlertController.Style.alert)
+            let confirm = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
+            invalidAlert.addAction(confirm)
+            present(invalidAlert, animated: true , completion: nil)
+        }
     }
 
 }

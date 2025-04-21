@@ -9,7 +9,13 @@ import UIKit
 import SnapKit
 import Then
 
-final class WelcomeViewController: UIViewController {
+final class WelcomeViewController: UIViewController, DataBindDelegate {
+    
+    var nameText: String?
+    
+    func welcomeDataBind(name: String) {
+        nameText = name
+    }
     
     //MARK: - UIComponent
     private lazy var tvingImg = UIImageView().then{
@@ -18,7 +24,9 @@ final class WelcomeViewController: UIViewController {
     }
     
     private lazy var welcomeLabel = UILabel().then{
-        $0.text = "atsopt@naver.com님\n반가워요!"
+        guard let nameText else { return }
+        $0.text = "\(nameText)님\n반가워요!"
+        
         $0.font = .pretendard(.bold, size: 23)
         $0.textColor = .white
         $0.numberOfLines = 2
@@ -36,12 +44,18 @@ final class WelcomeViewController: UIViewController {
 }
 
 extension WelcomeViewController {
+    
+    //MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
-        
         addViews()
         setLayout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationItem.hidesBackButton = true
     }
     
     //MARK: - Layout
@@ -75,7 +89,7 @@ extension WelcomeViewController {
     
 }
 
-
-#Preview{
-    WelcomeViewController()
-}
+//
+//#Preview{
+//    WelcomeViewController()
+//}
