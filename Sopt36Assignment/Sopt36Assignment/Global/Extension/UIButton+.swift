@@ -20,7 +20,7 @@ extension UIButton {
     
     func setSelectedBackgroundColor(colorName: String){
         guard let color = UIColor(named: colorName) else {
-            print("컬러에셋 '\(colorName)' 없음!")
+            print("컬러에셋 \(colorName) 없음!")
             return
         }
         self.clipsToBounds = true
