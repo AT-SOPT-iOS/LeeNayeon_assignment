@@ -78,7 +78,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.gray4.cgColor
         $0.addTarget(self, action: #selector(login), for: .touchUpInside)
-        $0.setBackgroundColor(color: .red)
+        $0.setSelectedBackgroundColor(colorName: "Red")
         
     }
     
@@ -306,9 +306,4 @@ extension LoginViewController {
         passwordTextField.isSecureTextEntry.toggle()
     }
 
-}
-
-
-#Preview {
-    LoginViewController()
 }
