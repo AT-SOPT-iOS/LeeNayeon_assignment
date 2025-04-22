@@ -33,4 +33,19 @@ extension UIButton {
             self.setBackgroundImage(colorImage, for: .normal)
         }
     }
+    
+    func disableToEnableButton(){
+        self.isEnabled = true
+        self.setSelectedBackgroundColor(colorName: "Red")
+        self.setTitleColor(.white, for: .normal)
+        self.layer.borderWidth = 0
+    }
+    
+    func enableToDisableButton(){
+        self.isEnabled = false
+        self.setBackgroundImage(nil, for: .normal)
+        self.backgroundColor = .clear
+        self.setTitleColor(.gray4, for: .normal)
+        self.layer.borderWidth = 1
+    }
 }
