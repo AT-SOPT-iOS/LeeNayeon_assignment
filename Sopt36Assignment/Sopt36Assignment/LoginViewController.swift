@@ -38,6 +38,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.layer.cornerRadius = 3
         $0.addLeftPadding(20)
         $0.addTarget(self, action: #selector(idTextFieldDidChange), for: .editingDidEnd)
+        $0.addTarget(self, action: #selector(enableLoginButton), for: .editingChanged)
     }
 
     private var pwInnerView = UIView()
@@ -55,6 +56,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.rightViewMode = .whileEditing
         $0.rightView = pwInnerView
         $0.addTarget(self, action: #selector(passwordTextFieldDidChange), for: .editingDidEnd)
+        $0.addTarget(self, action: #selector(enableLoginButton), for: .editingChanged)
     }
     
     private lazy var idClearButton = UIButton().then{
@@ -80,14 +82,12 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.setTitle("로그인하기", for: .normal)
         $0.backgroundColor = .clear
         $0.setTitleColor(.gray2, for: .normal)
-        $0.setTitleColor(.white, for: .selected)
         $0.titleLabel?.font = .pretendard(.semiBold, size: 14)
         $0.layer.cornerRadius = 3
         $0.layer.borderWidth = 1
+        $0.isEnabled = false
         $0.layer.borderColor = UIColor.gray4.cgColor
         $0.addTarget(self, action: #selector(login), for: .touchUpInside)
-        $0.setSelectedBackgroundColor(colorName: "Red")
-        
     }
     
     private var findStackView = UIStackView().then{
@@ -292,10 +292,18 @@ extension LoginViewController {
     //MARK: - login
     
     @objc
+    private func enableLoginButton(){
+        if idTextField.hasText && passwordTextField.hasText {
+            loginButton.isEnabled = true
+            loginButton.setSelectedBackgroundColor(colorName: "Red")
+            loginButton.setTitleColor(.white, for: .normal)
+            loginButton.layer.borderWidth = 0
+        }
+    }
+    
+    @objc
     func login(){
         loginButton.isSelected.toggle()
-        loginButton.layer.borderWidth = 0
-        
         pushToWelcomeVC()
     }
     
@@ -346,5 +354,12 @@ extension LoginViewController {
             present(invalidAlert, animated: true , completion: nil)
         }
     }
+    
 
+    
+
+}
+
+#Preview{
+    LoginViewController()
 }
