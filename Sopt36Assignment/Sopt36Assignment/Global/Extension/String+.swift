@@ -13,7 +13,7 @@ extension String{
     }
     
     func isValidNickname(nickName: String) -> Bool{
-        let regExp = "ㄱ-|가-힣"
+        let regExp = "^[가-힣ㄱ-ㅎ]{0,10}$"
         return NSPredicate(format: "SELF MATCHES %@", regExp).evaluate(with: self)
     }
     
