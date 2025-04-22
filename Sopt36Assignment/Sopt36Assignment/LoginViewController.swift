@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 import Then
 
-protocol DataBindDelegate: AnyObject {
-    func welcomeDataBind(name: String)
-}
-
-final class LoginViewController: UIViewController, UITextFieldDelegate {
+final class LoginViewController: UIViewController, UITextFieldDelegate, nickNameDelegate {
     
-    weak var delegate: DataBindDelegate?
+    var nameText: String?
+    
+    func nickNameBinding(nickName: String) {
+        nameText = nickName
+    }
     
     // MARK: - UIComponents
     
@@ -295,10 +295,10 @@ extension LoginViewController {
     @objc
     private func enableLoginButton(){
         if idTextField.hasText && passwordTextField.hasText {
-            loginButton.isEnabled = true
-            loginButton.setSelectedBackgroundColor(colorName: "Red")
-            loginButton.setTitleColor(.white, for: .normal)
-            loginButton.layer.borderWidth = 0
+            loginButton.disableToEnableButton()
+        }
+        else{
+            loginButton.enableToDisableButton()
         }
     }
     
@@ -310,7 +310,8 @@ extension LoginViewController {
     
     private func pushToWelcomeVC(){
         let welcomeVC = WelcomeViewController()
-        welcomeVC.nameText = idTextField.text
+        welcomeVC.nameText = nameText ?? idTextField.text
+        
         self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
     
@@ -361,13 +362,13 @@ extension LoginViewController {
     @objc
     func presentNicknameSheet(){
         let vc = WriteNicknameViewController()
+        vc.delegate = self
         
         if let sheet = vc.sheetPresentationController{
             sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false
             sheet.preferredCornerRadius = 30
-
         }
         self.present(vc, animated: true)
     }
