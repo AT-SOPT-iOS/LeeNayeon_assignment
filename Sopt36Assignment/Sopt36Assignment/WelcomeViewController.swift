@@ -9,13 +9,9 @@ import UIKit
 import SnapKit
 import Then
 
-final class WelcomeViewController: UIViewController, DataBindDelegate {
+final class WelcomeViewController: UIViewController {
     
     var nameText: String?
-    
-    func welcomeDataBind(name: String) {
-        nameText = name
-    }
     
     //MARK: - UIComponent
     private lazy var tvingImg = UIImageView().then{
@@ -50,6 +46,7 @@ extension WelcomeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .black
+
         addViews()
         setLayout()
     }
@@ -88,8 +85,3 @@ extension WelcomeViewController {
     }
     
 }
-
-//
-//#Preview{
-//    WelcomeViewController()
-//}
