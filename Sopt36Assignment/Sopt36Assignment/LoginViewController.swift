@@ -139,6 +139,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         $0.backgroundColor = .clear
         $0.layer.borderWidth = 0
         $0.setUnderline()
+        $0.addTarget(self, action: #selector(presentNicknameSheet), for: .touchUpInside)
     }
     
 }
@@ -355,11 +356,22 @@ extension LoginViewController {
         }
     }
     
+    // MARK: - Present Modal
+    
+    @objc
+    func presentNicknameSheet(){
+        let vc = WriteNicknameViewController()
+        
+        if let sheet = vc.sheetPresentationController{
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.preferredCornerRadius = 30
+
+        }
+        self.present(vc, animated: true)
+    }
 
     
 
-}
-
-#Preview{
-    LoginViewController()
 }
