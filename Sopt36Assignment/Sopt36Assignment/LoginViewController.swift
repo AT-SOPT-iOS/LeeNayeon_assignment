@@ -337,7 +337,7 @@ extension LoginViewController {
     func idTextFieldDidChange(_ textField: UITextField){
         let id = idTextField.text ?? ""
         
-        if !id.isValidEmail(email: id){
+        if !id.isValidEmail(){
             let invalidAlert = UIAlertController(title: "올바르지 않은 형식", message: "이메일 형식이 올바르지 않습니다.", preferredStyle: UIAlertController.Style.alert)
             let confirm = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
             invalidAlert.addAction(confirm)
@@ -349,7 +349,7 @@ extension LoginViewController {
     func passwordTextFieldDidChange(_ textField: UITextField){
         let password = passwordTextField.text ?? ""
         
-        if !password.isValidPassword(password: password){
+        if !password.isValidPassword(){
             let invalidAlert = UIAlertController(title: "올바르지 않은 형식", message: "비밀번호는 영어 대소문자 및 숫자 포함 8자 이상, 특수문자 1개 이상 포함이어여합니다.", preferredStyle: UIAlertController.Style.alert)
             let confirm = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
             invalidAlert.addAction(confirm)

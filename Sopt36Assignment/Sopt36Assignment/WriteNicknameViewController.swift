@@ -112,7 +112,7 @@ extension WriteNicknameViewController {
     func nickNameTextFieldDidChange(_ textField: UITextField){
         let name = nickNameTextField.text ?? ""
         
-        if !name.isValidNickname(nickName: name){
+        if !name.isValidNickname(){
             let invalidAlert = UIAlertController(title: "올바르지 않은 형식", message: "닉네임은 한글로 구성해주세요", preferredStyle: UIAlertController.Style.alert)
             let confirm = UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil)
             invalidAlert.addAction(confirm)
