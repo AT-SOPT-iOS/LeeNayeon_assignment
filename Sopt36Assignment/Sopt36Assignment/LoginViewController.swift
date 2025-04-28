@@ -142,10 +142,6 @@ final class LoginViewController: UIViewController, UITextFieldDelegate, nickName
         $0.addTarget(self, action: #selector(presentNicknameSheet), for: .touchUpInside)
     }
     
-}
-
-extension LoginViewController {
-    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -162,17 +158,21 @@ extension LoginViewController {
     // MARK: - Layout
     
     private func addViews(){
-        [pwClearButton, secureButton].forEach {
-            pwInnerView.addSubview($0)
-        }
+        self.pwInnerView.addSubviews(
+            pwClearButton,
+            secureButton
+        )
         
-        [findIDButton, dividerLabel, findPWButton].forEach{
-            findStackView.addSubview($0)
-        }
+        self.findStackView.addSubviews(
+            findIDButton,
+            dividerLabel,
+            findPWButton
+        )
         
-        [noAccountButton, goMakingNickname].forEach{
-            helpStackView.addSubview($0)
-        }
+        self.helpStackView.addSubviews(
+            noAccountButton,
+            goMakingNickname
+        )
         
         self.view.addSubviews(
             backButton,
@@ -266,6 +266,11 @@ extension LoginViewController {
             $0.leading.equalTo(noAccountButton.snp.trailing).offset(33)
         }
     }
+    
+    
+}
+
+extension LoginViewController {
     
     // MARK: - UITextFieldDelegate
     
