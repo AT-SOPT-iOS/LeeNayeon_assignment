@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class LoginViewController: UIViewController, UITextFieldDelegate, nickNameDelegate {
+final class LoginViewController: UIViewController, UITextFieldDelegate, NickNameDelegate {
     
     var nameText: String?
     
@@ -92,7 +92,8 @@ final class LoginViewController: UIViewController, UITextFieldDelegate, nickName
     
     private var findStackView = UIStackView().then{
         $0.axis = .horizontal
-        $0.distribution = .fillEqually
+        $0.distribution = .equalSpacing
+        $0.alignment = .center
     }
     
     private lazy var findIDButton = UIButton().then {
@@ -163,12 +164,10 @@ final class LoginViewController: UIViewController, UITextFieldDelegate, nickName
             secureButton
         )
         
-        self.findStackView.addSubviews(
-            findIDButton,
-            dividerLabel,
-            findPWButton
-        )
-        
+        [findIDButton, dividerLabel, findPWButton].forEach {
+            findStackView.addArrangedSubview($0)
+        }
+            
         self.helpStackView.addSubviews(
             noAccountButton,
             goMakingNickname
