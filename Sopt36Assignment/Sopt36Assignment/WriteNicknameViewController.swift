@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 import Then
 
-protocol nickNameDelegate: AnyObject {
+protocol NickNameDelegate: AnyObject {
     func nickNameBinding(nickName: String)
 }
 
 final class WriteNicknameViewController: UIViewController {
     
-    weak var delegate: nickNameDelegate?
+    weak var delegate: NickNameDelegate?
 
     //MARK: - UIComponents
     
