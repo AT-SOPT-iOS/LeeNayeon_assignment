@@ -47,7 +47,7 @@ extension WelcomeViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .black
 
-        addViews()
+        setUI()
         setLayout()
     }
     
@@ -57,7 +57,7 @@ extension WelcomeViewController {
     
     //MARK: - Layout
     
-    private func addViews(){
+    private func setUI(){
         self.view.addSubviews(
             tvingImg,
             welcomeLabel,

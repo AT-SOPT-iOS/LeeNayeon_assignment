@@ -56,13 +56,13 @@ extension WriteNicknameViewController {
         self.view.backgroundColor = .white
         
         
-        addViews()
+        setUI()
         setLayout()
     }
     
     //MARK: - Layout
     
-    private func addViews(){
+    private func setUI(){
         self.view.addSubviews(
             titleLabel,
             nickNameTextField,
