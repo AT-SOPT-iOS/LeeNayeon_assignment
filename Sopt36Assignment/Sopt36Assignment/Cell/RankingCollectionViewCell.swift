@@ -64,7 +64,7 @@ class RankingCollectionViewCell: UICollectionViewCell {
 }
 
 extension RankingCollectionViewCell {
-    func dataBind(_ itemData: TodayRankingModel){
+    func dataBind(_ itemData: MovieRankingModel){
         rankingNumber.text = String(itemData.ranking)
         movieImage.image = itemData.movieImg
     }
