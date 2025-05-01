@@ -223,6 +223,8 @@ extension HomeViewController : UICollectionViewDataSource {
             destinationVC = MovieViewController()
         case 4:
             destinationVC = SportsViewController()
+        case 5:
+            destinationVC = NewsViewController()
         default:
             destinationVC = UIViewController()
         }

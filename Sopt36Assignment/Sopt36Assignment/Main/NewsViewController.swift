@@ -1,13 +1,13 @@
 //
-//  SportsViewController.swift
+//  NewsViewController.swift
 //  Sopt36Assignment
 //
-//  Created by 이나연 on 4/30/25.
+//  Created by 이나연 on 5/1/25.
 //
 
 import UIKit
 
-final class SportsViewController : UIViewController {
+final class NewsViewController : UIViewController {
     
     private let titleLabel = UILabel()
     
@@ -23,7 +23,7 @@ final class SportsViewController : UIViewController {
     }
     
     private func setStyle(){
-        titleLabel.text = "스포츠"
+        titleLabel.text = "뉴스"
         titleLabel.textColor = .white
     }
     
