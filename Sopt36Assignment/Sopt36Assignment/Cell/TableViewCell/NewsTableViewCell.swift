@@ -9,15 +9,38 @@ import UIKit
 
 class NewsTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static let identifier = "NewsViewCell"
+
+    private let titleLabel = UILabel()
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+            super.init(style: style, reuseIdentifier: reuseIdentifier)
+            setUI()
+            setStyle()
+            setLayout()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUI(){
+        self.contentView.addSubviews(titleLabel)
+    }
+    
+    private func setStyle(){
+        contentView.backgroundColor = .black
+        titleLabel.text = "뉴스"
+        titleLabel.textColor = .white
+    }
+    
+    private func setLayout(){
+        titleLabel.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.trailing.equalToSuperview()
+        }
     }
 
 }
