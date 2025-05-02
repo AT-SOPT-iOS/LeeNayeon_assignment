@@ -50,10 +50,10 @@ final class HomeViewController : UIViewController{
         navigationController?.hidesBarsOnSwipe = true
         
         headerStackview.axis = .horizontal
-        headerStackview.distribution = .equalSpacing
-        headerStackview.alignment = .fill
+        headerStackview.distribution = .fill
+        headerStackview.alignment = .center
         headerStackview.isLayoutMarginsRelativeArrangement = true
-        headerStackview.spacing = 10
+        headerStackview.spacing = 20
         headerStackview.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 11)
         
         tvingLogoImage.image = UIImage(named: "mainTving")

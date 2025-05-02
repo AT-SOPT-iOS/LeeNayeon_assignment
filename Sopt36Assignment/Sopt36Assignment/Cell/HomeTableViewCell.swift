@@ -41,7 +41,7 @@ class HomeTableViewCell: UITableViewCell {
     private let pdLifeMovieLabel = HomeTitleLabel()
     private let pdLifeMovieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private lazy var notificationStackView = UIView()
+    private lazy var notificationView = UIView()
     private lazy var notificationLabel = UILabel()
     private lazy var notificationTitleLabel = UILabel()
     private lazy var goButton = UIButton()
@@ -100,15 +100,9 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     private func setUI(){
-        [genreCollectionView, indicatorView, dividerView, mainMovieImgae, todayRankingLabel, todayRankingCollectionView, liveRankingLabel, liveRanknigMoreButton, liveRankingCollectionView, liveMovieRankingLabel, liveMovieRanknigMoreButton , liveMovieRankingCollectionView, baseBallCollectionView, sportsListCollectionView, pdLifeMovieLabel, pdLifeMovieCollectionView, notificationStackView, notificationLabel, notificationTitleLabel, goButton, infoStackView].forEach {
+        [genreCollectionView, indicatorView, dividerView, mainMovieImgae, todayRankingLabel, todayRankingCollectionView, liveRankingLabel, liveRanknigMoreButton, liveRankingCollectionView, liveMovieRankingLabel, liveMovieRanknigMoreButton , liveMovieRankingCollectionView, baseBallCollectionView, sportsListCollectionView, pdLifeMovieLabel, pdLifeMovieCollectionView, notificationView, notificationLabel, notificationTitleLabel, goButton, infoStackView].forEach {
             contentView.addSubview($0)
         }
-        
-
-        
-//        [notificationLabel, notificationTitleLabel, goButton].forEach {
-//            notificationStackView.addArrangedSubview($0)
-//        }
         
         topInfoLabels.forEach{
             infoTopStackView.addArrangedSubview($0)
@@ -155,15 +149,9 @@ class HomeTableViewCell: UITableViewCell {
         sportsListCollectionView.backgroundColor = .clear
         pdLifeMovieCollectionView.backgroundColor = .clear
         
-//        notificationStackView.axis = .horizontal
-//        notificationStackView.alignment = .center
-//        notificationStackView.distribution = .fill
-        notificationStackView.backgroundColor = .gray4
-//        notificationStackView.spacing = 2
-        notificationStackView.layer.cornerRadius = 3
-//        notificationStackView.isLayoutMarginsRelativeArrangement = true
-//        notificationStackView.layoutMargins = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 20)
-        
+        notificationView.backgroundColor = .gray4
+        notificationView.layer.cornerRadius = 3
+
         notificationLabel.text = "공지"
         notificationLabel.textColor = .gray2
         notificationLabel.font = .pretendard(.medium, size: 11)
@@ -290,25 +278,25 @@ class HomeTableViewCell: UITableViewCell {
             $0.height.equalTo(90)
         }
         
-        notificationStackView.snp.makeConstraints {
+        notificationView.snp.makeConstraints {
             $0.top.equalTo(pdLifeMovieCollectionView.snp.bottom).offset(23)
             $0.leading.trailing.equalToSuperview().inset(12)
             $0.height.equalTo(50)
         }
         
         notificationLabel.snp.makeConstraints {
-            $0.leading.equalTo(notificationStackView).inset(12)
-            $0.centerY.equalTo(notificationStackView)
+            $0.leading.equalTo(notificationView).inset(12)
+            $0.centerY.equalTo(notificationView)
         }
         
         notificationTitleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(notificationStackView)
+            $0.centerY.equalTo(notificationView)
             $0.leading.equalTo(notificationLabel.snp.trailing).offset(6)
         }
         
         goButton.snp.makeConstraints {
-            $0.centerY.equalTo(notificationStackView)
-            $0.trailing.equalTo(notificationStackView).inset(12)
+            $0.centerY.equalTo(notificationView)
+            $0.trailing.equalTo(notificationView).inset(12)
             $0.width.height.equalTo(18)
         }
         
