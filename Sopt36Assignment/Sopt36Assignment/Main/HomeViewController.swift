@@ -26,6 +26,8 @@ final class HomeViewController : UIViewController{
     
     private let genreItems = ["홈", "드라마", "예능", "영화", "스포츠", "뉴스"]
     
+    private let indicatorView = UIView()
+    
     private let contentContainerView = UIView()
     
     //MARK: - Property
@@ -44,17 +46,27 @@ final class HomeViewController : UIViewController{
         setGenreCollectionViewFlowLayout()
         registerGenreCell()
         
+        let initialIndexPath = IndexPath(item: 0, section: 0)
+        genreCollectionView.selectItem(at: initialIndexPath, animated: false, scrollPosition: [])
         
-        let firstIndex = IndexPath(item: 0, section: 0)
-        genreCollectionView.selectItem(at: firstIndex, animated: false, scrollPosition: .right)
-        changeContentViewController(HomeContentViewController())
+        collectionView(genreCollectionView, didSelectItemAt: initialIndexPath)
+    
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if indicatorView.frame == .zero {
+                DispatchQueue.main.async {
+                    let initialIndexPath = IndexPath(item: 0, section: 0)
+                    self.moveIndicator(to: initialIndexPath)
+                }
+            }
+    }
     private func setUI(){
         self.view.addSubviews(baseScrollView)
         baseScrollView.addSubview(scrollContentView)
         
-        [headerStackview, contentContainerView, genreCollectionView].forEach{
+        [headerStackview, genreCollectionView, indicatorView, contentContainerView].forEach{
             scrollContentView.addSubview($0)
         }
         
@@ -67,6 +79,7 @@ final class HomeViewController : UIViewController{
     
     private func setStyle(){
         self.view.backgroundColor = .black
+        navigationController?.hidesBarsOnSwipe = true
         
         headerStackview.axis = .horizontal
         headerStackview.distribution = .equalSpacing
@@ -85,17 +98,19 @@ final class HomeViewController : UIViewController{
         profileIconImage.contentMode = .scaleAspectFit
         
         genreCollectionView.backgroundColor = .clear
-
+        
+        indicatorView.backgroundColor = .white
     }
     
     private func setLayout(){
         baseScrollView.snp.makeConstraints {
-            $0.edges.equalTo(self.view)
+            $0.edges.equalTo(view)
         }
         
         scrollContentView.snp.makeConstraints{
             $0.edges.equalTo(baseScrollView.contentLayoutGuide)
             $0.width.equalTo(baseScrollView.frameLayoutGuide)
+            $0.bottom.equalTo(contentContainerView.snp.bottom)
         }
         
         let heightConstraint = scrollContentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
@@ -103,7 +118,7 @@ final class HomeViewController : UIViewController{
         heightConstraint.isActive = true
         
         headerStackview.snp.makeConstraints{
-            $0.top.equalTo(self.view).offset(50)
+            $0.top.equalTo(baseScrollView.contentLayoutGuide.snp.top)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.height.equalTo(78)
@@ -126,14 +141,25 @@ final class HomeViewController : UIViewController{
             $0.height.equalTo(27)
         }
         
+        indicatorView.snp.makeConstraints {
+            $0.top.equalTo(genreCollectionView.snp.bottom).offset(10)
+            $0.height.equalTo(3)
+            $0.width.equalTo(0)
+            $0.centerX.equalToSuperview()
+        }
+        
+        moveIndicator(to: IndexPath(item: 0, section: 0))
+        
         contentContainerView.snp.makeConstraints {
-            $0.top.equalTo(genreCollectionView.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.top.equalTo(genreCollectionView.snp.bottom).offset(16)
+            $0.leading.trailing.equalTo(baseScrollView.contentLayoutGuide)
+            $0.bottom.equalTo(baseScrollView.contentLayoutGuide)
+            $0.width.equalTo(baseScrollView.frameLayoutGuide)
         }
     }
     
     private func setDelegate(){
+        baseScrollView.delegate = self
         genreCollectionView.delegate = self
         genreCollectionView.dataSource = self
         
@@ -174,11 +200,52 @@ extension HomeViewController {
         
         vc.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
-            $0.height.greaterThanOrEqualTo(800)
+            $0.height.greaterThanOrEqualTo(1500)
         }
         
         vc.didMove(toParent: self)
         currentEmbeddedVC = vc
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let headerHeight = headerStackview.frame.height
+        let distanceFromOrigin = abs(scrollView.contentOffset.y)
+        let isPulledDown = scrollView.contentOffset.y <= -headerHeight
+        let stopExpanHeader = scrollView.contentOffset.y <= -(headerHeight*2)
+        
+        print(scrollView.contentOffset.y)
+        if !stopExpanHeader && isPulledDown {
+            headerStackview.snp.updateConstraints{ make in
+                make.height.equalTo(distanceFromOrigin)
+            }
+            headerStackview.alpha = 1
+        }
+        else if !isPulledDown {
+            let height = scrollView.contentOffset.y <= 0 ? distanceFromOrigin : 0
+            headerStackview.snp.updateConstraints { (make) in
+                make.height.equalTo(height)
+            }
+            
+            headerStackview.alpha = distanceFromOrigin / headerHeight
+            
+        }
+    }
+    
+    func moveIndicator(to indexPath: IndexPath){
+        guard let cell = genreCollectionView.cellForItem(at: indexPath) else { return }
+        let labelWidth = (cell as? GenreCollectionViewCell)?.contentView.frame.width ?? 30
+        
+        indicatorView.snp.remakeConstraints {
+            $0.top.equalTo(genreCollectionView.snp.bottom).offset(10)
+            $0.height.equalTo(3)
+            $0.width.equalTo(labelWidth)
+            $0.centerX.equalTo(cell)
+        }
+                
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+        
     }
 }
 
@@ -229,11 +296,25 @@ extension HomeViewController : UICollectionViewDataSource {
             destinationVC = UIViewController()
         }
         
+        moveIndicator(to: indexPath)
         changeContentViewController(destinationVC)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        moveIndicator(to: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = genreItems[indexPath.item]
+            .size(withAttributes: [.font: UIFont.pretendard(.regular, size: 17)]).width + 20
+        return CGSize(width: width, height: 40)
     }
 }
 
 extension HomeViewController: UICollectionViewDelegate{
     
 }
+
 
