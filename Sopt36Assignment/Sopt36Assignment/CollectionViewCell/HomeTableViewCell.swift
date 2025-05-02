@@ -12,9 +12,9 @@ class HomeTableViewCell: UITableViewCell {
     
     static let identifier = "HomeTableViewCell"
     
-    private var genreCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    
-    private let genreItems = ["홈", "드라마", "예능", "영화", "스포츠", "뉴스"]
+//    private var genreCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+//    
+//    private let genreItems = ["홈", "드라마", "예능", "영화", "스포츠", "뉴스"]
     
     private let indicatorView = UIView()
     private let dividerView = UIView()
@@ -80,18 +80,6 @@ class HomeTableViewCell: UITableViewCell {
             setDelegate()
             setCollectionViewFlowLayout()
             registerCollectionViewCell()
-        
-            let initialIndexPath = IndexPath(item: 0, section: 0)
-            genreCollectionView.selectItem(at: initialIndexPath, animated: false, scrollPosition: [])
-            
-            if indicatorView.frame == .zero {
-                    DispatchQueue.main.async {
-                        let initialIndexPath = IndexPath(item: 0, section: 0)
-                        self.moveIndicator(to: initialIndexPath)
-                    }
-                }
-            
-       
     }
         
     @available(*, unavailable)
@@ -100,7 +88,7 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     private func setUI(){
-        [genreCollectionView, indicatorView, dividerView, mainMovieImgae, todayRankingLabel, todayRankingCollectionView, liveRankingLabel, liveRanknigMoreButton, liveRankingCollectionView, liveMovieRankingLabel, liveMovieRanknigMoreButton , liveMovieRankingCollectionView, baseBallCollectionView, sportsListCollectionView, pdLifeMovieLabel, pdLifeMovieCollectionView, notificationView, notificationLabel, notificationTitleLabel, goButton, infoStackView].forEach {
+        [mainMovieImgae, todayRankingLabel, todayRankingCollectionView, liveRankingLabel, liveRanknigMoreButton, liveRankingCollectionView, liveMovieRankingLabel, liveMovieRanknigMoreButton , liveMovieRankingCollectionView, baseBallCollectionView, sportsListCollectionView, pdLifeMovieLabel, pdLifeMovieCollectionView, notificationView, notificationLabel, notificationTitleLabel, goButton, infoStackView].forEach {
             contentView.addSubview($0)
         }
         
@@ -120,11 +108,6 @@ class HomeTableViewCell: UITableViewCell {
     private func setStyle(){
         backgroundColor = .clear
         contentView.backgroundColor = .clear
-        genreCollectionView.backgroundColor = .black
-        
-        indicatorView.backgroundColor = .white
-        
-        dividerView.backgroundColor = .gray2
         
         mainMovieImgae.image = UIImage(named: "mainPoster")
         mainMovieImgae.contentMode = .scaleAspectFill
@@ -181,30 +164,8 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     private func setLayout(){
-        genreCollectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.height.equalTo(27)
-        }
-        
-        indicatorView.snp.makeConstraints {
-            $0.top.equalTo(genreCollectionView.snp.bottom).offset(10)
-            $0.height.equalTo(3)
-            $0.width.equalTo(0)
-            $0.centerX.equalToSuperview()
-        }
-        
-        moveIndicator(to: IndexPath(item: 0, section: 0))
-        
-        dividerView.snp.makeConstraints{
-            $0.top.equalTo(indicatorView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        
         mainMovieImgae.snp.makeConstraints {
-            $0.top.equalTo(dividerView.snp.bottom).offset(10)
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(400)
         }
@@ -310,9 +271,6 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     private func setDelegate(){
-        genreCollectionView.delegate = self
-        genreCollectionView.dataSource = self
-        
         todayRankingCollectionView.delegate = self
         todayRankingCollectionView.dataSource = self
         
@@ -332,44 +290,7 @@ class HomeTableViewCell: UITableViewCell {
         pdLifeMovieCollectionView.dataSource = self
     }
     
-    // MARK: - Genre Cell
-    private func setGenreCollectionViewFlowLayout(){
-        let flowLayout = UICollectionViewFlowLayout()
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let cellHeight : CGFloat = 27
-        let cellWidth = (screenWidth - 18 - 18 - 28) / 6
-        
-        flowLayout.itemSize = CGSize(width : cellWidth, height: cellHeight)
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.collectionView?.isScrollEnabled = false
-        flowLayout.minimumInteritemSpacing = 28
-        self.genreCollectionView.setCollectionViewLayout(flowLayout, animated: false)
-        
-    }
-    
-    private func registerGenreCell(){
-        genreCollectionView.register(GenreCollectionViewCell.self, forCellWithReuseIdentifier: GenreCollectionViewCell.identifier)
-    }
-    
-    func moveIndicator(to indexPath: IndexPath){
-        guard let cell = genreCollectionView.cellForItem(at: indexPath) else { return }
-        let labelWidth = (cell as? GenreCollectionViewCell)?.contentView.frame.width ?? 15
-        
-        indicatorView.snp.remakeConstraints {
-            $0.top.equalTo(genreCollectionView.snp.bottom).offset(10)
-            $0.height.equalTo(3)
-            $0.width.equalTo(labelWidth)
-            $0.centerX.equalTo(cell)
-        }
-        
-        UIView.animate(withDuration: 0.25) {
-            self.contentView.layoutIfNeeded()
-        }
-    }
-    
     private func setCollectionViewFlowLayout(){
-        setGenreCollectionViewFlowLayout()
         todayRankingSetFlowLayout()
         liveRankingSetFlowLayout()
         liveMovieRankingSetFlowLayout()
@@ -379,7 +300,6 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     private func registerCollectionViewCell(){
-        registerGenreCell()
         registerTodayRankingCell()
         registerLiveRankingCell()
         registerLiveMovieRankingCell()
@@ -569,8 +489,8 @@ extension HomeTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch(collectionView){
-        case genreCollectionView :
-            return genreItems.count
+//        case genreCollectionView :
+//            return genreItems.count
         case todayRankingCollectionView :
             return movieRankingList.count
         case liveRankingCollectionView:
@@ -592,14 +512,6 @@ extension HomeTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch(collectionView){
-        case genreCollectionView :
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.identifier, for: indexPath) as? GenreCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            
-            cell.dataBind(genreItems[indexPath.item])
-            return cell
-            
         case todayRankingCollectionView :
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RankingCollectionViewCell.identifier, for: indexPath) as? RankingCollectionViewCell else {
                 return RankingCollectionViewCell()
@@ -657,14 +569,6 @@ extension HomeTableViewCell : UICollectionViewDataSource {
             return UICollectionViewCell()
         
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = genreItems[indexPath.item]
-            .size(withAttributes: [.font: UIFont.pretendard(.regular, size: 17)]).width + 20
-        return CGSize(width: width, height: 40)
     }
 }
 
