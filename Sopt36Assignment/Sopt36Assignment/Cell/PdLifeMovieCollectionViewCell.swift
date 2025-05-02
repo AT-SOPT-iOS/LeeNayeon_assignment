@@ -40,6 +40,7 @@ class PdLifeMovieCollectionViewCell: UICollectionViewCell {
     private func setLayout() {
         movieImage.snp.makeConstraints {
             $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
             $0.width.equalTo(160)
             $0.height.equalTo(90)
         }

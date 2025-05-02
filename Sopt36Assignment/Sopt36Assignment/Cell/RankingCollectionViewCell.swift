@@ -37,7 +37,7 @@ class RankingCollectionViewCell: UICollectionViewCell {
     }
     
     private func setStyle(){
-        rankingNumber.font = .pretendard(.semiBold, size: 50).italic
+        rankingNumber.font = .pretendard(.semiBold, size: 50)
         rankingNumber.textAlignment = .right
         rankingNumber.textColor = .white
         rankingNumber.numberOfLines = 1
