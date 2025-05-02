@@ -41,6 +41,7 @@ class LiveMovieRankingCollectionViewCell: UICollectionViewCell {
     private func setLayout() {
         movieImage.snp.makeConstraints {
             $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
             $0.width.equalTo(98)
             $0.height.equalTo(146)
         }

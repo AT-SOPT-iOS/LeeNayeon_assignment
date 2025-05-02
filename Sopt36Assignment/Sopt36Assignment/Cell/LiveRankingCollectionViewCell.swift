@@ -77,7 +77,7 @@ class LiveRankingCollectionViewCell: UICollectionViewCell {
         rankingNumber.snp.makeConstraints {
             $0.top.equalTo(movieImage.snp.bottom).offset(7)
             $0.leading.equalToSuperview()
-            $0.width.equalTo(18)
+            $0.width.equalTo(20)
             $0.height.equalTo(30)
             $0.trailing.equalTo(infoStackView.snp.leading).offset(-10)
         }
