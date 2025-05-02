@@ -41,16 +41,16 @@ class HomeTableViewCell: UITableViewCell {
     private let pdLifeMovieLabel = HomeTitleLabel()
     private let pdLifeMovieCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private lazy var notificationView = UIView()
-    private lazy var notificationLabel = UILabel()
-    private lazy var notificationTitleLabel = UILabel()
-    private lazy var goButton = UIButton()
+    private var notificationView = UIView()
+    private var notificationLabel = UILabel()
+    private var notificationTitleLabel = UILabel()
+    private var goButton = UIButton()
     
-    private lazy var infoStackView = UIStackView()
-    private lazy var infoTopStackView = UIStackView()
-    private lazy var infoBottomStackView = UIStackView()
+    private var infoStackView = UIStackView()
+    private var infoTopStackView = UIStackView()
+    private var infoBottomStackView = UIStackView()
     
-    private lazy var topInfoLabels: [InfoLabel] = [
+    private var topInfoLabels: [InfoLabel] = [
         InfoLabel(text: "고객문의"),
         InfoLabel(text: "·"),
         InfoLabel(text: "이용약관"),
@@ -58,7 +58,7 @@ class HomeTableViewCell: UITableViewCell {
         InfoLabel(text: "개인정보처리방침", textColor: .white)
     ]
     
-    private lazy var bottomInfoLabels: [InfoLabel] = [
+    private var bottomInfoLabels: [InfoLabel] = [
         InfoLabel(text: "사업자정보"),
         InfoLabel(text: "·"),
         InfoLabel(text: "인재채용")

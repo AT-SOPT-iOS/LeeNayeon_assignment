@@ -10,7 +10,7 @@ import UIKit
 class LiveMovieRankingCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "LiveMovieRankingCollectionViewCell"
     
-    private lazy var movieImage = UIImageView()
+    private var movieImage = UIImageView()
     
     //MARK: - Initializers
     override init(frame: CGRect) {

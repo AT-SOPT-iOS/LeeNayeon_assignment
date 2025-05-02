@@ -10,7 +10,7 @@ import UIKit
 class PdLifeMovieCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "PdLifeMovieCollectionViewCell"
     
-    private lazy var movieImage = UIImageView()
+    private var movieImage = UIImageView()
     
     //MARK: - Initializers
     

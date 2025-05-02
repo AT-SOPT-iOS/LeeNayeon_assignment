@@ -11,12 +11,12 @@ class LiveRankingCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "LiveRankingCollectionViewCell"
     
-    private lazy var rankingNumber = UILabel()
-    private lazy var movieImage = UIImageView()
-    private lazy var infoStackView = UIStackView()
-    private lazy var titleLabel = UILabel()
-    private lazy var subtitleLabel = UILabel()
-    private lazy var ratingLabel = UILabel()
+    private var rankingNumber = UILabel()
+    private var movieImage = UIImageView()
+    private var infoStackView = UIStackView()
+    private var titleLabel = UILabel()
+    private var subtitleLabel = UILabel()
+    private var ratingLabel = UILabel()
     
     //MARK: - Initializers
     override init(frame: CGRect) {

@@ -16,10 +16,10 @@ final class HomeViewController : UIViewController{
     
     private let homeTableView = UITableView(frame: .zero, style: .plain)
     
-    private lazy var headerStackview = UIStackView()
-    private lazy var tvingLogoImage = UIImageView()
-    private lazy var searchIconImage = UIImageView()
-    private lazy var profileIconImage = UIImageView()
+    private var headerStackview = UIStackView()
+    private var tvingLogoImage = UIImageView()
+    private var searchIconImage = UIImageView()
+    private var profileIconImage = UIImageView()
     
     private var currentEmbeddedVC: UIViewController?
 

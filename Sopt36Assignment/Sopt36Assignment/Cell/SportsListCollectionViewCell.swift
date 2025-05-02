@@ -10,7 +10,7 @@ import UIKit
 class SportsListCollectionViewCell: UICollectionViewCell {
     static let identifier: String = "SportsListCollectionViewCell"
     
-    private lazy var relayImage = UIImageView()
+    private var relayImage = UIImageView()
     
     //MARK: - Initializers
     

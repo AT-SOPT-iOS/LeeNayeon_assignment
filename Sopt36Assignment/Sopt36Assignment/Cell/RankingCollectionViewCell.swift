@@ -11,8 +11,8 @@ class RankingCollectionViewCell: UICollectionViewCell {
     
     static let identifier: String = "RankingCollectionViewCell"
     
-    private lazy var rankingNumber = UILabel()
-    private lazy var movieImage = UIImageView()
+    private var rankingNumber = UILabel()
+    private var movieImage = UIImageView()
     
     //MARK: - Initializers
     override init(frame: CGRect) {
