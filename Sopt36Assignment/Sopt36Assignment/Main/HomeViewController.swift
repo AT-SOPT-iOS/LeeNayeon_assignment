@@ -31,6 +31,7 @@ final class HomeViewController : UIViewController{
 
     //MARK: - Property
     private var selectedIndexPath : Int = 0
+    private var genreTopConstraint: Constraint?
     
     // MARK: - LifeCycle
     
@@ -113,7 +114,8 @@ final class HomeViewController : UIViewController{
         }
         
         genreCollectionView.snp.makeConstraints {
-            $0.top.equalTo(headerStackview.snp.bottom).offset(30)
+//            $0.top.equalTo(headerStackview.snp.bottom).offset(30)
+            genreTopConstraint = $0.top.equalTo(headerStackview.snp.bottom).offset(30).constraint
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.height.equalTo(27)
@@ -172,8 +174,9 @@ final class HomeViewController : UIViewController{
     }
     
     func moveIndicator(to indexPath: IndexPath){
+        genreCollectionView.layoutIfNeeded()
         guard let cell = genreCollectionView.cellForItem(at: indexPath) else { return }
-        let labelWidth = (cell as? GenreCollectionViewCell)?.contentView.frame.width ?? 15
+        let labelWidth = cell.frame.width 
         
         indicatorView.snp.remakeConstraints {
             $0.top.equalTo(genreCollectionView.snp.bottom).offset(10)
@@ -199,7 +202,22 @@ final class HomeViewController : UIViewController{
 
 
 extension HomeViewController : UITableViewDelegate {
-    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        if offsetY > 20 {
+                headerStackview.alpha = 0
+
+                genreTopConstraint?.update(offset: 0)
+            } else {
+                headerStackview.alpha = 1
+
+                genreTopConstraint?.update(offset: 30) 
+            }
+
+            UIView.animate(withDuration: 0.2) {
+                self.view.layoutIfNeeded()
+            }
+    }
 }
 
 extension HomeViewController : UITableViewDataSource {
@@ -270,10 +288,11 @@ extension HomeViewController : UICollectionViewDataSource {
         moveIndicator(to: indexPath)
         homeTableView.reloadData()
     }
+
     
 }
 
 
 extension HomeViewController : UICollectionViewDelegate{
-    
+
 }
