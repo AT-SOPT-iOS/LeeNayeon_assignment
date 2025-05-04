@@ -114,7 +114,6 @@ final class HomeViewController : UIViewController{
         }
         
         genreCollectionView.snp.makeConstraints {
-//            $0.top.equalTo(headerStackview.snp.bottom).offset(30)
             genreTopConstraint = $0.top.equalTo(headerStackview.snp.bottom).offset(30).constraint
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
