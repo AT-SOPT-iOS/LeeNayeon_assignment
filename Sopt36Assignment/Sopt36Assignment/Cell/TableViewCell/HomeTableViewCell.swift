@@ -449,48 +449,10 @@ class HomeTableViewCell: UITableViewCell {
 }
 
 
-
-// MARK: - TODO
-//extension HomeTableViewCell : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let destinationVC : UIViewController
-//        
-//        switch indexPath.item {
-//        case 0:
-//            destinationVC = HomeViewController()
-//        case 1 :
-//            destinationVC = DramaViewController()
-//        case 2:
-//            destinationVC = EntertainmentViewController()
-//        case 3:
-//            destinationVC = MovieViewController()
-//        case 4:
-//            destinationVC = SportsViewController()
-//        case 5:
-//            destinationVC = NewsViewController()
-//        default:
-//            destinationVC = UIViewController()
-//        }
-//        
-//        moveIndicator(to: indexPath)
-//
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = genreItems[indexPath.item]
-//            .size(withAttributes: [.font: UIFont.pretendard(.regular, size: 17)]).width + 20
-//        return CGSize(width: width, height: 40)
-//    }
-//}
-
 extension HomeTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch(collectionView){
-//        case genreCollectionView :
-//            return genreItems.count
         case todayRankingCollectionView :
             return movieRankingList.count
         case liveRankingCollectionView:
@@ -519,6 +481,7 @@ extension HomeTableViewCell : UICollectionViewDataSource {
             
             cell.dataBind(movieRankingList[indexPath.item])
             return cell
+            
         case liveRankingCollectionView:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LiveRankingCollectionViewCell.identifier, for: indexPath) as? LiveRankingCollectionViewCell else {
                 return LiveRankingCollectionViewCell()
