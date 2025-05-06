@@ -10,7 +10,7 @@ import UIKit
 class BaseBallCollectionViewCell: UICollectionViewCell {
     static let identifier : String = "BaseBallCollectionViewCell"
     
-    private lazy var groupImage = UIImageView()
+    private var groupImage = UIImageView()
     
     //MARK: - Initializers
     
