@@ -31,9 +31,7 @@ class GenreCollectionViewCell: UICollectionViewCell {
     //MARK: - Layout
     
     private func setUI(){
-        [genreLabel].forEach {
-            contentView.addSubview($0)
-        }
+        contentView.addSubview(genreLabel)
         
         genreLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
