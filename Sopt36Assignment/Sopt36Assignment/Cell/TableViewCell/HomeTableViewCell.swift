@@ -11,11 +11,7 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
     
     static let identifier = "HomeTableViewCell"
-    
-//    private var genreCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-//    
-//    private let genreItems = ["홈", "드라마", "예능", "영화", "스포츠", "뉴스"]
-    
+        
     private let indicatorView = UIView()
     private let dividerView = UIView()
     
