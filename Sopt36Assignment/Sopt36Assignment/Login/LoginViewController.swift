@@ -152,13 +152,13 @@ final class LoginViewController: UIViewController, UITextFieldDelegate, NickName
         idTextField.delegate = self
         passwordTextField.delegate = self
         
-        addViews()
+        setUI()
         setLayout()
     }
     
     // MARK: - Layout
     
-    private func addViews(){
+    private func setUI(){
         self.pwInnerView.addSubviews(
             pwClearButton,
             secureButton
