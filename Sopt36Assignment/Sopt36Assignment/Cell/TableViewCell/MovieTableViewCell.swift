@@ -69,7 +69,7 @@ class MovieTableViewCell: UITableViewCell {
             do {
                 let result = try await GetBoxOfficeService.shared.fetchMovieList(
                     key: API_KEY,
-                    Date: "20250508"
+                    Date: getYesterdayDate()
                     )
                 self.boxOfficeList = result
                 DispatchQueue.main.async {
@@ -83,11 +83,12 @@ class MovieTableViewCell: UITableViewCell {
     }
     
     @objc
-    private func getTodayDate() -> String{
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        return dateFormatter.string(from: date)
+    private func getYesterdayDate() -> String{
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())!
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.string(from: yesterday)
     }
 }
 
