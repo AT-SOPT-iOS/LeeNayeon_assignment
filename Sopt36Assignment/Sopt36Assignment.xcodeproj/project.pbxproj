@@ -269,6 +269,8 @@
 		};
 		5148BBEA2DAD7AF6003B4BA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 5148BBD62DAD7AF5003B4BA8 /* Sopt36Assignment */;
+			baseConfigurationReferenceRelativePath = App/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
