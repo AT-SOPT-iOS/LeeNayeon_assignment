@@ -33,6 +33,9 @@ struct HomeView: View {
             
             PDLike()
                 .padding(.top, 25)
+            
+            FooterView()
+                .padding(.top, 23)
         }
     }
 }
