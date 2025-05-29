@@ -24,7 +24,7 @@ struct TodayTop20: View {
                 Text("오늘의 티빙 TOP 20")
                     .font(.bold15)
                     .foregroundColor(Color.white)
-                    .padding(.leading, 12)
+                
                 Spacer()
             }
             
@@ -42,7 +42,7 @@ struct TodayTop20: View {
                     }
                 }
             }
-        }
+        }.padding(.leading, 12)
         
     }
 }

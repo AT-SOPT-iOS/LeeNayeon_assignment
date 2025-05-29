@@ -24,8 +24,7 @@ struct RankingMovie: View {
                 Text("실시간 인기 영화")
                     .font(.bold15)
                     .foregroundColor(Color.white)
-                    .padding(.leading, 12)
-                
+    
                 Spacer()
                 
                 Text("더보기")
@@ -41,7 +40,7 @@ struct RankingMovie: View {
                     }
                 }
             }
-        }
+        }.padding(.leading, 12)
         
     }
 }
