@@ -19,8 +19,20 @@ struct HomeView: View {
             TodayTop20()
                 .padding(.top, 9)
             
+            LiveRanking()
+                .padding(.top, 18)
+            
             RankingMovie()
-                .padding(.top, 9)
+                .padding(.top, 18)
+            
+            Baseball()
+                .padding(.top, 28)
+            
+            SportsTV()
+                .padding(.top, 28)
+            
+            PDLike()
+                .padding(.top, 25)
         }
     }
 }
