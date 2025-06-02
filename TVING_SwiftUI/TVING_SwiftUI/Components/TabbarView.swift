@@ -10,70 +10,36 @@ import SwiftUI
 struct TabbarView: View {
     @Binding var selectedTab: Tab
     
+    private let tabs: [Tab] = [.home, .drama, .entertainment, .movie, .sports, .news]
+        private let tabTitles: [Tab: String] = [
+            .home: "홈", .drama: "드라마", .entertainment: "예능",
+            .movie: "영화", .sports: "스포츠", .news: "뉴스"
+        ]
+    
     var body: some View {
-        HStack {
-            Spacer()
-            
-            Button {
-                selectedTab = .home
-            } label: {
-                Text("홈")
-                    .font(.regular17)
-                    .foregroundColor(Color.white)
+        VStack(spacing: 0){
+            HStack {
+                ForEach(tabs, id: \.self) { tab in
+                    VStack {
+                        Button {
+                            selectedTab = tab
+                        } label: {
+                            Text(tabTitles[tab] ?? "")
+                                .font(.regular17)
+                                .foregroundColor(.white)
+                        }
+                        
+                        Rectangle()
+                            .fill(selectedTab == tab ? Color.white : Color.clear)
+                            .frame(height: 3)
+                    }
+                }
             }
             
-            Spacer()
+            Rectangle()
+                .fill(Color.gray2)
+                .frame(height: 1)
             
-            Button {
-                selectedTab = .drama
-            } label: {
-                Text("드라마")
-                    .font(.regular17)
-                    .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            
-            Button {
-                selectedTab = .entertainment
-            } label: {
-                Text("예능")
-                    .font(.regular17)
-                    .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            
-            Button {
-                selectedTab = .movie
-            } label: {
-                Text("영화")
-                    .font(.regular17)
-                    .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            
-            Button {
-                selectedTab = .sports
-            } label: {
-                Text("스포츠")
-                    .font(.regular17)
-                    .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            
-            Button {
-                selectedTab = .news
-            } label: {
-                Text("뉴스")
-                    .font(.regular17)
-                    .foregroundColor(Color.white)
-            }
-            
-            Spacer()
-            
-        }
+        }.background(Color.black)
     }
 }
