@@ -20,7 +20,7 @@ struct TabbarView: View {
         VStack(spacing: 0){
             HStack {
                 ForEach(tabs, id: \.self) { tab in
-                    VStack {
+                    VStack(spacing: 7) {
                         Button {
                             selectedTab = tab
                         } label: {
