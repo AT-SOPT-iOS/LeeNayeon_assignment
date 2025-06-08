@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-//enum Tab {
-//    case home
-//    case drama
-//    case entertainment
-//    case movie
-//    case sports
-//    case news
-//}
-
 struct ContentView: View {
     @State var selectedTab: Tab = .home
     
